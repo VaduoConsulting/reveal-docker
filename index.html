@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="fr">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Docker revealed</title>
+
+		<meta name="description" content="Introduction to Docker">
+		<meta name="author" content="Julien WITTOUCK">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/white.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/vs.css">
+
+        <link rel="stylesheet" href="css/vaduo.css"/>
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h2><img src="images/small_h-trans.png" style="vertical-align: middle"/> revealed</h2>
+					<p>
+						<a href="http://github.com/Juwit">Julien WITTOUCK</a>
+					</p>
+                    <img src="images/logo.png" style="width:300px"/>
+				</section>
+
+				<section>
+					<h3>About Me</h3>
+					<p>Solution &amp; DevOps Architect at Vaduo Consulting</p>
+					<img src="images/bebe_juwit.jpg" />
+				</section>
+
+				<section>
+					<h2>Au menu</h2>
+					<ul>
+						<li>What is Docker?</li>
+						<li>How to use Docker?</li>
+						<li>Getting started!</li>
+					</ul>
+				</section>
+
+				<section class="stack">
+					<section>
+						<h2>What is Docker?</h2>
+            <img src="images/small_h-trans.png"/>
+					</section>
+                    <section>
+                        <h2>Docker is not...</h2>
+                        <h4>Virtual Machines</h4>
+                        <h4>Magic</h4>
+                        <img src="images/morpheus.png"/>
+                    </section>
+                    <section>
+                        <h2>What is Docker?</h2>
+                        <p><b>Docker</b> creates isolated environnements (called <i>containers</i>) to isolate applications.</p>
+                        <h2 class="fragment">How it works?</h2>
+                        <p class="fragment">Docker stands on <b>Linux</b> kernel, Linux <b><a href="http://man7.org/linux/man-pages/man7/namespaces.7.html">namespaces</a></b> (isolated environments) and on Linux <b><a href="http://man7.org/linux/man-pages/man7/cgroups.7.html">cgroups</a></b> (resource management memory/cpu/disk)</p>
+                    </section>
+                    <section>
+                        <h2>How it works?</h2>
+                        <img src="images/docker_libcontainer.png"/>
+                    </section>
+                    <section>
+                        <h2>Docker is not Virtual Machines</h2>
+                        <img src="images/vm.png"/>
+                        <img class="fragment" src="images/docker.png"/>
+                    </section>
+                    <section>
+                        <h2>What is a container? <img src="images/cargo_container.png" style="height: 72px; vertical-align: middle;"/></h2>
+                        <p>It's all about isolation</p>
+                        <ul>
+                            <li>Isolated filesystem</li>
+                            <li>Isolated users</li>
+                            <li>Isolated process</li>
+                            <li>Isolated networks</li>
+                        </ul>
+                        <p>As close as possible to a standard Linux installation...</p>
+                        <p>but runs on the Host's Kernel</p>
+                    </section>
+                    <section>
+                        <h2>Docker images</h2>
+                        <ul>
+                            <li>An image is like a container snapshot (static/read-only).</li>
+                            <li>A container is the instanciation of an image.</li>
+                            <li>Images have base images.</li>
+                            <li>Images are layered.</li>
+                            <li>Images are taggued</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Docker images</h2>
+                        <img src="images/docker_images.png"/>
+                    </section>
+                    <section>
+                        <h2>Docker images</h2>
+                        <ul>
+                            <li><i>debian:jessie</i> : Contains debian-jessie libs/apps</li>
+                            <li><i>buildpack-deps:jessie-curl</i> : Contains curl</li>
+                            <li><i>openjdk:8-jre</i> : Contains OpenJdk JRE 8</li>
+                            <li><i>tomcat:9.0-jre8</i> : Contains Tomcat 9</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Docker images</h2>
+                        <pre><code data-trim data-noescape class="bash">user@host:~$ docker images
+REPOSITORY        TAG            IMAGE ID        CREATED        SIZE
+tomcat            9-jre8         345a325b9d4f    2 weeks ago    334.9 MB
+openjdk           8-jre          b13ebf1a4999    3 weeks ago    311.2 MB
+buildpack-deps    jessie-curl    187e81a2e1ae    3 weeks ago    167.3 MB
+debian            jessie         73e72bf822ca    3 weeks ago    123 MB
+</code></pre>
+                    </section>
+                    <section>
+                        <h2>Docker ecosystem</h2>
+                        <img src="images/docker_architecture.png"/>
+                    </section>
+                </section>
+
+                <section class="stack">
+                    <section>
+                        <h2>How to use docker?</h2>
+                        <img src="images/bender_cigar.jpg"/>
+                    </section>
+                    <section>
+                        <h2>How to use docker</h2>
+                        <h3>Main commands</h3>
+                        <ul>
+                            <li><b>docker pull</b> : get an image from the registry</li>
+                            <li><b>docker build</b> : create an image from a Dockerfile</li>
+                            <li><b>docker create</b> : create a container from an image</li>
+                            <li><b>docker run</b> : creates a container from an and starts it</li>
+                            <li><b>docker start/stop</b> : starts/stops containers</li>
+                            <li><b>docker commit</b> : creates an image from a running container</li>
+                            <li><b>docker logs</b> : fetch the logs af a container (stdout/stderr)</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Working with images</h2>
+                        <ul>
+                            <li><b>docker pull <i>imageName:tag</i></b> : get an image from the registry</li>
+                            <li><b>docker build</b> : create an image from a Dockerfile</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Working with images</h2>
+                        <h3>Building an image from a Dockerfile</h3>
+                        <p><b>Dockerfile</b> : File describing the construction steps of an image</p>
+                        <pre><code class="dockerfile">FROM debian:jessie
+
+RUN echo 'deb http://deb.debian.org/debian jessie-backports main' > /etc/apt/sources.list.d/jessie-backports.list
+
+ENV JAVA_DEBIAN_VERSION 8u111-b14-2~bpo8+1
+
+RUN apt-get update \
+	&& apt-get install -y openjdk-8-jre-headless="$JAVA_DEBIAN_VERSION"
+
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/jre</code></pre>
+                        <pre><code class="bash">user@host:~$ docker build --tag myJRE:1.0 .</code></pre>
+                    </section>
+                    <section>
+                        <h2>Working with images</h2>
+                        <h3>Listing images</h3>
+                        <pre><code data-trim data-noescape class="bash">user@host:~$ <b>docker images</b>
+REPOSITORY        TAG            IMAGE ID        CREATED        SIZE
+tomcat            9-jre8         345a325b9d4f    2 weeks ago    334.9 MB
+openjdk           8-jre          b13ebf1a4999    3 weeks ago    311.2 MB
+buildpack-deps    jessie-curl    187e81a2e1ae    3 weeks ago    167.3 MB
+debian            jessie         73e72bf822ca    3 weeks ago    123 MB
+</code></pre>
+                    </section>
+                    <section>
+                        <h2>Working with images</h2>
+                        <h3>Removing images</h3>
+                        <pre><code data-trim data-noescape class="bash">user@host:~$ <b>docker rmi tomcat:9-jre8</b>
+Untagged: tomcat:9-jre8
+Deleted: sha256:345a325b9d4ff4e3ceb5239f706c32f6058111bf101bfab4ea2386aaa9a58afa
+Deleted: sha256:edd8f93b163a01e11c701c65cf24373ef0326a40692cf848e963b3c9b56e9619
+Deleted: sha256:ad145ed46bd12e51afacbc9313fbf51ea9af1b451434f3761c993c14440aacff
+Deleted: sha256:6976e3f3625b4467efa53b04a24fb1a97741b4125291f115ebc79d7a545650d7
+Deleted: sha256:66db73f2947c39132e728c6f263ddeef0b9bc3262b4022560eb82bcb1a1f55fb
+Deleted: sha256:78780b79263b4913e74e1855dd55f8f2e65ff848fb7582c3c76af88789e55f3a
+Deleted: sha256:bd20af890581a5af2c1ab5b4d9ab095833142878600edd91fea639e641129cd9
+</code></pre>
+                    </section>
+                    <section>
+                        <h2>Working with containers</h2>
+                        <h3>Running a container from an image</h3>
+                        <pre><code data-trim data-noescape class="bash">user@host:~$ <b>$ docker run --tty --interactive debian:jessie</b></code></pre>
+                        <p>Creates a container, attaches an interactive shell</p>
+                        <pre><code data-trim data-noescape class="bash">user@host:~$ <b>$ docker run debian:jessie echo Docker is fun</b></code></pre>
+                        <p>Creates a container, runs the command <i>echo Docker is fun</i> and exits</p>
+                        <pre><code data-trim data-noescape class="bash">user@host:~$ <b>$ docker run --rm debian:jessie echo Docker is fun</b></code></pre>
+                        <p>Creates a container, runs the command <i>echo Docker is fun</i> and deletes the container</p>
+                    </section>
+
+                    <section>
+                        <h2>Working with containers</h2>
+                        <h3>Creating a container from an image</h3>
+                        <pre><code data-trim data-noescape class="bash">user@host:~$ <b>$ docker create -p 5432:5432 --name myPostgresInstance postgres</b></code></pre>
+                        <p>Creates a container, maps host port 5432 to container port 5432 and names the container</p>
+                        <pre><code data-trim data-noescape class="bash">user@host:~$ <b>$ docker start myPostgresInstance</b></code></pre>
+                        <p>Starts the container</p>
+                        <pre><code data-trim data-noescape class="bash">user@host:~$ <b>$ docker start myPostgresInstance</b></code></pre>
+                    </section>
+                    <section>
+                        <h2>Working with containers</h2>
+                        <pre><code data-trim data-noescape class="bash">user@host:~$ <b>$ docker create -p 5432:5432 --name myPostgresInstance postgres</b></code></pre>
+                        <pre><code data-trim data-noescape class="bash">user@host:~$ <b>$ docker start myPostgresInstance</b></code></pre>
+                        <h4>Where is my data ?</h4>
+                        <img src="images/fry.png"/>
+                        <h4>Inside the container filesystem!</h4>
+                    </section>
+                    <section>
+                        <h2>Working with containers</h2>
+                        <h3>Binding filesystem</h3>
+                        <pre><code data-trim data-noescape class="bash">user@host:~$ <b>$ docker create \
+    -p 5432:5432 \
+    -v /data/postgres:/var/lib/postgresql \
+    --name myPostgresInstance postgres</b></code></pre>
+                        <p>Creates a container, maps host port 5432 to container port 5432 and names the container</p>
+                        <p>The container directory <i>/var/lib/postgresql</i> is mapped to the host directory <i>/data/postgres</i></p>
+                    </section>
+                </section>
+
+
+                <section class="stacked">
+                    <section>
+                        <h2>Getting started !</h2>
+                        <img src="images/leonidas.png"/>
+                    </section>
+                    <section>
+                        <h2>Online pratical with <a href="https://www.katacoda.com/courses/docker">Katacoda</a></h2>
+                        <ul>
+                            <li><a href="https://www.katacoda.com/courses/docker/1">Launching Containers</a></li>
+                            <li><a href="https://www.katacoda.com/courses/docker/create-nginx-static-web-server">Deploy Static HTML Website</a></li>
+                            <li><a href="https://www.katacoda.com/courses/docker/playground">Playground</a></li>
+                        </ul>
+                        <p>Stuff to do on the playground</p>
+                        <ul>
+                            <li>Get the tomcat image</li>
+                            <li>Start the tomcat server listening on port 80</li>
+                        </ul>
+                    </section>
+                </section>
+
+                <section class="stacked">
+                    <section>
+                        <h3>Thank you!</h3>
+                    </section>
+                    <section>
+                        <h3>Questions?</h3>
+                        <img src="images/questions.png"/>
+                    </section>
+                </section>
+
+            </div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+        <aside class="vaduo_aside_logo"></aside>
+
+	</body>
+</html>
