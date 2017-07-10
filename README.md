@@ -1,7 +1,4 @@
 # reveal-docker
 Short presentation of Docker
 
-View online : http://juwit.github.io/reveal-docker/
-
-## Links
-
+View online : https://vaduoconsulting.github.io/reveal-docker/
